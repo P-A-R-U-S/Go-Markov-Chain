@@ -1,4 +1,4 @@
-go_import_path: Go-Markov-Chain
+  go_import_path: Go-Markov-Chain
   language: go
   go:
     - "1.10"
