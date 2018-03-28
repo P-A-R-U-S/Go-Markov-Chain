@@ -52,10 +52,10 @@ import (
 	"strings"
 )
 
-// Prefix is a Markov chain prefix of one or more words.
+// Link is a Markov chain prefix of one or more words.
 type Link []string
 
-// Link represented as a string (for use as a map key).
+// String represented Link as a string (for use as a map key).
 func (p Link) String() string {
 	return strings.Join(p, " ")
 }
