@@ -1,0 +1,15 @@
+go_import_path: Go-Markov-Chain
+  language: go
+  go:
+    - "1.10"
+  install:
+    # Add dependencies to GOPATH and PATH
+    - export GOPATH="/home/travis/gopath/"
+  script:
+    - ls
+    - pwd
+    - echo $GOPATH
+    - echo $GOROOT
+    - echo $PATH
+    - go test -v ./...
+    - go test -bench=. ./...
