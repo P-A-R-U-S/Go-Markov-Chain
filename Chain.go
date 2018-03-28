@@ -45,17 +45,17 @@ flags on the command-line.
 package main
 
 import (
-	"strings"
-	"io"
 	"bufio"
 	"fmt"
+	"io"
 	"math/rand"
+	"strings"
 )
 
 // Prefix is a Markov chain prefix of one or more words.
 type Link []string
 
-// String returns the Link as a string (for use as a map key).
+// Link represented as a string (for use as a map key).
 func (p Link) String() string {
 	return strings.Join(p, " ")
 }
@@ -70,13 +70,13 @@ func (p Link) Shift(word string) {
 // A Link is a string of prefixLen words joined with spaces.
 // A Pair is a single word and number of appearance after Link. A Link can have multiple Pairs.
 type Chain struct {
-	chain     	map[string] map[string] int
+	chain       map[string]map[string]int
 	linksLength int
 }
 
 // NewChain returns a new Chain with prefixes of prefixLen words.
 func NewChain(linksLength int) *Chain {
-	return &Chain{make(map[string] map[string] int), linksLength}
+	return &Chain{make(map[string]map[string]int), linksLength}
 }
 
 // Build reads text from the provided Reader and
@@ -93,8 +93,8 @@ func (c *Chain) Build(r io.Reader) {
 		key := l.String()
 
 		// Add key if not exist with empty map
-		if _,ok := c.chain[key]; !ok {
-			c.chain[key] = make(map[string] int)
+		if _, ok := c.chain[key]; !ok {
+			c.chain[key] = make(map[string]int)
 		}
 		c.chain[key][s] = c.chain[key][s] + 1
 		l.Shift(s)
@@ -112,14 +112,14 @@ func (c *Chain) Generate(n int) string {
 		}
 
 		choicesLen := 0
-		for _,v :=range  choices {
+		for _, v := range choices {
 			choicesLen += v
 		}
 
 		index := rand.Intn(choicesLen)
 
 		next := ""
-		for k,v :=range  choices {
+		for k, v := range choices {
 			if (index - v) <= 0 {
 				next = k
 				break
