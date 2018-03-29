@@ -9,27 +9,24 @@ of The Practice of Programming (Kernighan and Pike, Addison-Wesley 1999).
 See also Computer Recreations, Scientific American 260, 122 - 125 (1989).
 
 A Markov chain algorithm generates text by creating a statistical model of
-potential textual suffixes for a given prefix. Consider this text:
+potential textual suffixes for a given links of chain. Consider this text:
 
-	I am not a number! I am a free man!
+	One fish One fish One fish two fish red fish blue fish
 
 Our Markov chain algorithm would arrange this text into this set of prefixes
 and suffixes, or "chain": (This table assumes a prefix length of two words.)
 
-	Prefix       Suffix
+	Link       	  Suffix
 
-	"" ""        I
-	"" I         am
-	I am         a
-	I am         not
-	a free       man!
-	am a         free
-	am not       a
-	a number!    I
-	number! I    am
-	not a        number!
+	"" ""        [One, 1]
+	"" One       [fish, 3]
+	One fish     [One, 2], [two, 1]
+	Two fish     [red,1]
+	fish red     [fish, 1]
+	red fish     [blue, 1]
+	blue fish    [`END`, 1]
 
-To generate text using this table we select an initial prefix ("I am", for
+To generate text using this table we select an initial links ("One fish", for
 example), choose one of the suffixes associated with that prefix at random
 with probability determined by the input statistics ("a"),
 and then create a new prefix by removing the first word from the prefix
